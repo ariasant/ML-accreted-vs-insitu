@@ -56,7 +56,9 @@ git clone https://github.com/ariasant/ML-accreted-vs-insitu.git
 
 Ex: for MAC and Linux distributions add this in you .bashrc file:
 
-`export PYTHONPATH="${PYTHONPATH}:/path/to/this/repository"`
+```
+export PYTHONPATH="${PYTHONPATH}:/path/to/this/repository"
+```
 
 3. Create a virtual environment with all the dependencies
 
