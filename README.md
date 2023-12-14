@@ -13,7 +13,7 @@ The available models are:
   
 All models can be found in the implementations developed using both ARTEMIS and Auriga data.  
 
-The codes for the training and optimisation of the models are reported in ... for reference. 
+The codes for the training and optimisation of the models are reported in [codes](./codes/) for reference. 
 
 
 # Main Advantages
