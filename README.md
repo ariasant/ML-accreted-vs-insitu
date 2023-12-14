@@ -48,7 +48,9 @@ The following list of **packages** is required to use the models:
 
 1. Clone this repository
 
-`git clone https://github.com/ariasant/ML-accreted-vs-insitu.git`
+```
+git clone https://github.com/ariasant/ML-accreted-vs-insitu.git
+```
 
 2. OPTIONAL: Add the path of the repository to your python path
 
@@ -58,15 +60,19 @@ Ex: for MAC and Linux distributions add this in you .bashrc file:
 
 3. Create a virtual environment with all the dependencies
 
-Ex using conda:
+Ex: using conda:
 
-`conda create -n foo python=3.9.16 joblib=1.2.0 numpy=1.24.3 tensorflow=2.13.0`
+```
+conda create -n foo python=3.9.16 joblib=1.2.0 numpy=1.24.3 tensorflow=2.13.0
+```
 
 4. Activate the environment
 
-Ex using conda:
+Ex: using conda:
 
-`conda activate path/to/environemnt/foo`
+```
+conda activate path/to/environemnt/foo
+```
 
 5. Import the model you want to use
 
