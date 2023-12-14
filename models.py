@@ -15,6 +15,7 @@ class MLP_ARTEMIS(tf.keras.Model):
                                     tf.keras.layers.Dense(1, activation='sigmoid')])
 
         # Load weights
+        self.MLP.build(input_shape=(None, 8))
         self.MLP.load_weights('model_weights/MLP_ARTEMIS.h5')
 
     def call(self, inputs, training=False):
@@ -25,6 +26,25 @@ class MLP_ARTEMIS(tf.keras.Model):
 
         label = self.MLP(inputs)
 
+        return label
+
+    def predict(self, inputs, threshold=None):
+
+        probabilities = self(inputs)[:,0]
+
+        if threshold == None:
+        
+            labels = probabilities
+        
+        else:
+
+            labels = np.zeros(probabilities.shape[0])
+
+            labels[probabilities>=threshold] = 1.0
+        
+
+        return labels
+    
 
 class MLP_Auriga(tf.keras.Model):
 
@@ -36,6 +56,7 @@ class MLP_Auriga(tf.keras.Model):
                                     tf.keras.layers.Dense(1, activation='sigmoid')])
 
         # Load weights
+        self.MLP.build(input_shape=(None, 8))
         self.MLP.load_weights('model_weights/MLP_Auriga.h5')
 
     def call(self, inputs, training=False):
@@ -45,6 +66,25 @@ class MLP_Auriga(tf.keras.Model):
         inputs = tf.convert_to_tensor(scaler.transform(inputs.numpy()), np.float32)
 
         label = self.MLP(inputs)
+
+        return label
+    
+    def predict(self, inputs, threshold=None):
+
+        probabilities = self(inputs)[:,0]
+
+        if threshold == None:
+        
+            labels = probabilities
+        
+        else:
+
+            labels = np.zeros(probabilities.shape[0])
+
+            labels[probabilities>=threshold] = 1.0
+        
+
+        return labels
 
 
 class MLP_galaxy_features_ARTEMIS(tf.keras.Model):
@@ -57,6 +97,7 @@ class MLP_galaxy_features_ARTEMIS(tf.keras.Model):
                                     tf.keras.layers.Dense(1, activation='sigmoid')])
 
         # Load weights
+        self.MLP.build(input_shape=(None, 14))
         self.MLP.load_weights('model_weights/MLP_galaxy_features_ARTEMIS.h5')
 
     def call(self, inputs, training=False):
@@ -66,6 +107,25 @@ class MLP_galaxy_features_ARTEMIS(tf.keras.Model):
         inputs = tf.convert_to_tensor(scaler.transform(inputs.numpy()), np.float32)
 
         label = self.MLP(inputs)
+
+        return label
+    
+    def predict(self, inputs, threshold=None):
+
+        probabilities = self(inputs)[:,0]
+
+        if threshold == None:
+        
+            labels = probabilities
+        
+        else:
+
+            labels = np.zeros(probabilities.shape[0])
+
+            labels[probabilities>=threshold] = 1.0
+        
+
+        return labels
 
 
 class MLP_galaxy_fetures_Auriga(tf.keras.Model):
@@ -78,6 +138,7 @@ class MLP_galaxy_fetures_Auriga(tf.keras.Model):
                                     tf.keras.layers.Dense(1, activation='sigmoid')])
 
         # Load weights
+        self.MLP.build(input_shape=(None, 14))
         self.MLP.load_weights('model_weights/MLP_galaxy_features_Auriga.h5')
 
     def call(self, inputs, training=False):
@@ -87,6 +148,25 @@ class MLP_galaxy_fetures_Auriga(tf.keras.Model):
         inputs = tf.convert_to_tensor(scaler.transform(inputs.numpy()), np.float32)
 
         label = self.MLP(inputs)
+
+        return label
+    
+    def predict(self, inputs, threshold=None):
+
+        probabilities = self(inputs)[:,0]
+
+        if threshold == None:
+        
+            labels = probabilities
+        
+        else:
+
+            labels = np.zeros(probabilities.shape[0])
+
+            labels[probabilities>=threshold] = 1.0
+        
+
+        return labels
 
 
 class TML_ARTEMIS(tf.keras.Model):
@@ -129,6 +209,23 @@ class TML_ARTEMIS(tf.keras.Model):
         label = self.TML(x)
 
         return label
+    
+    def predict(self, inputs, threshold=None):
+
+        probabilities = self(inputs)[:,0]
+
+        if threshold == None:
+        
+            labels = probabilities
+        
+        else:
+
+            labels = np.zeros(probabilities.shape[0])
+
+            labels[probabilities>=threshold] = 1.0
+        
+
+        return labels
 
 
 class TML_Auriga(tf.keras.Model):
@@ -171,6 +268,23 @@ class TML_Auriga(tf.keras.Model):
         label = self.TML(x)
 
         return label
+    
+    def predict(self, inputs, threshold=None):
+
+        probabilities = self(inputs)[:,0]
+
+        if threshold == None:
+        
+            labels = probabilities
+        
+        else:
+
+            labels = np.zeros(probabilities.shape[0])
+
+            labels[probabilities>=threshold] = 1.0
+        
+
+        return labels
 
 
 class xgb_ARTEMIS():
@@ -179,13 +293,24 @@ class xgb_ARTEMIS():
         
         self.xgb_model = pickle.load((open('model_weights/xgb_ARTEMIS.pkl','rb')))
 
-    def predict(self, inputs):
+    def predict(self, inputs, threshold=None):
 
         # Normalize features in data into the range seen by the models during training
         scaler = joblib.load('model_weights/scaler_ARTEMIS.save')
         inputs = scaler.transform(inputs)
 
-        labels = self.xgb_model.predict_proba(inputs)[:,1]
+        probabilities = self.xgb_model.predict_proba(inputs)[:,1]
+
+        if threshold == None:
+        
+            labels = probabilities
+        
+        else:
+
+            labels = np.zeros(probabilities.shape[0])
+
+            labels[probabilities>=threshold] = 1.0
+
 
         return labels
 
@@ -196,13 +321,24 @@ class xgb_Auriga():
         
         self.xgb_model = pickle.load((open('model_weights/xgb_Auriga.pkl','rb')))
 
-    def predict(self, inputs):
+    def predict(self, inputs, threshold=None):
 
         # Normalize features in data into the range seen by the models during training
         scaler = joblib.load('model_weights/scaler_AURIGA.save')
         inputs = scaler.transform(inputs)
 
-        labels = self.xgb_model.predict_proba(inputs)[:,1]
+        probabilities = self.xgb_model.predict_proba(inputs)[:,1]
+
+        if threshold == None:
+        
+            labels = probabilities
+        
+        else:
+
+            labels = np.zeros(probabilities.shape[0])
+
+            labels[probabilities>=threshold] = 1.0
+
 
         return labels
         

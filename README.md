@@ -157,7 +157,7 @@ These are subclasses of `tensorflow.keras.Model` objects. The models have been t
 
 ## TML_ARTEMIS, TML_Auriga
 
-Models implementing the transformational machine learning technique. The models are based on an ensemble of MLPs, each of which is `tensorflow.keras.Model` object. During the prediction, *x* is passed to each MLP in the ensemble. The resulting ensemble of predictions is then used as an input to another MLP. Method:
+These are subclasses of `tensorflow.keras.Model` objects. The models are based on an ensemble of MLPs, each of which is `tensorflow.keras.Model` object. During the prediction, *x* is passed to each MLP in the ensemble. The resulting ensemble of predictions is then used as an input to another MLP. Method:
 ```
 .predict(x,
          threshold=None
