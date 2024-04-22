@@ -26,7 +26,7 @@ class MLP_ARTEMIS(tf.keras.Model):
 
         label = self.MLP(inputs)
 
-        return label
+        return label.numpy()
 
     def predict(self, inputs, threshold=None):
 
@@ -62,12 +62,12 @@ class MLP_Auriga(tf.keras.Model):
     def call(self, inputs, training=False):
 
         # Normalize features in data into the range seen by the models during training
-        scaler = joblib.load('model_weights/scaler_Auriga.save')
+        scaler = joblib.load('model_weights/scaler_AURIGA.save')
         inputs = tf.convert_to_tensor(scaler.transform(inputs.numpy()), np.float32)
 
         label = self.MLP(inputs)
 
-        return label
+        return label.numpy()
     
     def predict(self, inputs, threshold=None):
 
@@ -108,7 +108,7 @@ class MLP_galaxy_features_ARTEMIS(tf.keras.Model):
 
         label = self.MLP(inputs)
 
-        return label
+        return label.numpy()
     
     def predict(self, inputs, threshold=None):
 
@@ -128,7 +128,7 @@ class MLP_galaxy_features_ARTEMIS(tf.keras.Model):
         return labels
 
 
-class MLP_galaxy_fetures_Auriga(tf.keras.Model):
+class MLP_galaxy_features_Auriga(tf.keras.Model):
 
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
@@ -149,7 +149,7 @@ class MLP_galaxy_fetures_Auriga(tf.keras.Model):
 
         label = self.MLP(inputs)
 
-        return label
+        return label.numpy()
     
     def predict(self, inputs, threshold=None):
 
@@ -208,7 +208,7 @@ class TML_ARTEMIS(tf.keras.Model):
         # Pass predictions to neural network
         label = self.TML(x)
 
-        return label
+        return label.numpy()
     
     def predict(self, inputs, threshold=None):
 
@@ -234,7 +234,7 @@ class TML_Auriga(tf.keras.Model):
         super().__init__(**kwargs)
 
 
-        train_halos = [1,15,17,18,19,23,24,25,27,38,40,44]
+        train_halos = [16,23,24,27]
         weights_list = ['model_weights/individual_galaxies/Auriga/G{:02}_MLP_weights.h5'.format(halo) for halo in train_halos]
         self.model_ensemble = []
 
@@ -250,7 +250,7 @@ class TML_Auriga(tf.keras.Model):
                                 tf.keras.layers.Dense(1, activation='sigmoid')
                                 ])
         
-        self.TML.build(input_shape=(None, 12))
+        self.TML.build(input_shape=(None, len(train_halos)))
         self.TML.load_weights('model_weights/TML_Auriga.h5')
 
 
@@ -267,7 +267,7 @@ class TML_Auriga(tf.keras.Model):
         # Pass predictions to neural network
         label = self.TML(x)
 
-        return label
+        return label.numpy()
     
     def predict(self, inputs, threshold=None):
 
