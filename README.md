@@ -198,3 +198,24 @@ These are trained instances of the `xgboost.XGBClassifier` object. Method:
 
 
 # Reference Paper 
+Sante A., Font A. S., Ortega-Martorell S., Olier I., McCarthy I. G., "Applying machine learning to Galactic Archaeology: how well can we recover the origin of stars in Milky Way-like galaxies?", 2024, MNRAS, 531, 4363
+
+```
+@ARTICLE{2024MNRAS.531.4363S,
+       author = {{Sante}, Andrea and {Font}, Andreea S. and {Ortega-Martorell}, Sandra and {Olier}, Ivan and {McCarthy}, Ian G.},
+        title = "{Applying machine learning to Galactic Archaeology: how well can we recover the origin of stars in Milky Way-like galaxies?}",
+      journal = {\mnras},
+     keywords = {Astrophysics - Astrophysics of Galaxies},
+         year = 2024,
+        month = jul,
+       volume = {531},
+       number = {4},
+        pages = {4363-4382},
+          doi = {10.1093/mnras/stae1398},
+archivePrefix = {arXiv},
+       eprint = {2405.00102},
+ primaryClass = {astro-ph.GA},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4363S},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+```
